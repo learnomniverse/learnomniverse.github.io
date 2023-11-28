@@ -1,0 +1,30 @@
+[book]
+authors = ["Marco Alesiani"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Learn Omniverse"
+
+[output.html]
+default-theme = "Coal"
+preferred-dark-theme = "Coal"
+curly-quotes = true
+git-repository-url = "https://github.com/learnomniverse/learnomniverse.github.io"
+edit-url-template = "https://github.com/learnomniverse/learnomniverse.github.io/edit/master/{path}"
+git-repository-icon = "fa-github"
+additional-css = [
+    "theme/custom.css",
+    "theme/mdbook-admonish.css"
+]
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 4
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.2" # do not edit: managed by `mdbook-admonish install`
+
+# [preprocessor.catppuccin]
+# assets_version = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`

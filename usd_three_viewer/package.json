@@ -1,0 +1,44 @@
+{
+    "private": true,
+    "version": "1.5.1",
+    "description": "Preview glTF models using three.js and a drag-and-drop interface.",
+    "author": "Don McCurdy <dm@donmccurdy.com> (https://www.donmccurdy.com)",
+    "homepage": "https://github.com/donmccurdy/three-gltf-viewer",
+    "license": "MIT",
+    "main": "public/app.js",
+    "browserslist": [
+        ">1%",
+        "not dead"
+    ],
+    "staticFiles": {
+        "staticPath": [
+            {
+                "staticPath": "assets",
+                "staticOutDir": "assets"
+            }
+        ]
+    },
+    "scripts": {
+        "dev": "vite --port 3000",
+        "build": "vite build && npm run copy-gltf-assets && npm run deploy-to-mdbook && npm run fixup-paths-for-mdbook",
+        "clean": "rimraf dist/**",
+        "test": "node test/gen_test.js",
+        "deploy": "npm run build && vercel --local-config vercel.json --prod",
+        "postversion": "git push && git push --tags",
+        "copy-gltf-assets": "cp usd_logo.glb dist/usd_logo.glb",
+        "deploy-to-mdbook": "rm -rf ../src/usd_three_viewer && mkdir ../src/usd_three_viewer && cp -r ./dist/* ../src/usd_three_viewer",
+        "fixup-paths-for-mdbook": "find ../src/usd_three_viewer/ -type f -exec sed -i 's/\\/assets\\//\\/usd_three_viewer\\/assets\\//g' {} +"
+    },
+    "dependencies": {
+        "dat.gui": "^0.7.9",
+        "gltf-validator": "^2.0.0-dev.3.9",
+        "query-string": "^8.1.0",
+        "simple-dropzone": "^0.8.3",
+        "three": "^0.154.0",
+        "vhtml": "^2.2.0"
+    },
+    "devDependencies": {
+        "rimraf": "^5.0.1",
+        "vite": "^4.4.3"
+    }
+}
