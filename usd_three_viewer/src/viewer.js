@@ -18,7 +18,11 @@ import {
     Vector3,
     WebGLRenderer,
     LinearToneMapping,
-    ACESFilmicToneMapping
+    ACESFilmicToneMapping,
+    PlaneGeometry,
+    Mesh,
+    MeshBasicMaterial,
+    DoubleSide
 } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -115,7 +119,7 @@ export class Viewer {
         this.controls = new OrbitControls(this.defaultCamera, this.renderer.domElement);
         this.controls.screenSpacePanning = true;
 
-        this.sg = new SelectiveGlow(this.scene, this.defaultCamera, this.renderer);
+        // this.sg = new SelectiveGlow(this.scene, this.defaultCamera, this.renderer);
         // console.log(this.sg);
 
         this.el.appendChild(this.renderer.domElement);
@@ -133,6 +137,51 @@ export class Viewer {
         this.addAxesHelper();
         this.addGUI();
         if (options.kiosk) this.gui.close();
+
+        // Create flying orbital screens
+        {
+            // Create a basic material with a red color
+            var basicMaterial = new MeshBasicMaterial({ color: 0xf22ff0 });
+            // Set the opacity to 1 and the transparent to false
+            basicMaterial.opacity = 1;
+            basicMaterial.transparent = false;
+            // Set the side to double-sided
+            basicMaterial.side = DoubleSide;
+
+
+            let createCircumferenceOfScreens = (y_ring_coordinate, radius) => {
+                // Create an array of screens and add them to the scene
+                var screens = [];
+                var numScreens = 15; // The number of screens to create
+                var angle = (2 * Math.PI) / numScreens; // The angle between each screen
+
+                for (var i = 0; i < numScreens; i++) {
+                    // Create a screen geometry and a mesh
+                    var screenGeometry = new PlaneGeometry(0.2, 0.2, 10, 10);
+                    var screenMesh = new Mesh(screenGeometry, basicMaterial);
+
+                    // Position the screen on the sphere
+                    var x = radius * Math.cos(i * angle) * Math.sqrt(1 - y_ring_coordinate * y_ring_coordinate / (radius * radius));
+                    var y = y_ring_coordinate;
+                    var z = radius * Math.sin(i * angle) * Math.sqrt(1 - y_ring_coordinate * y_ring_coordinate / (radius * radius));
+                    screenMesh.position.set(x, y, z);
+
+                    // Rotate the screen to face the origin
+                    screenMesh.lookAt(0, 0, 0);
+
+                    // Add the screen to the scene and the array
+                    this.scene.add(screenMesh);
+                    screens.push(screenMesh);
+                }
+            };
+
+            let radius = 0.9
+            createCircumferenceOfScreens(0, radius);
+            createCircumferenceOfScreens(0.3, radius);
+            createCircumferenceOfScreens(0.6, radius);
+            createCircumferenceOfScreens(-0.3, radius);
+
+        }
 
         this.firstTimeMaterialSetupDone = false;
         this.animate = this.animate.bind(this);
@@ -171,50 +220,50 @@ export class Viewer {
             return currentObject; // Return the object at the specified path
         }
 
-        if (this.firstTimeMaterialSetupDone == false) {
-            // var mesh = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
-            let objectAtPath = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
-            if (!objectAtPath) {
-                return; // Maybe scene isn't ready yet
-            }
-            this.glowingMaterial = objectAtPath.material;
-            // var material = mesh.material;
+        // if (this.firstTimeMaterialSetupDone == false) {
+        //     // var mesh = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
+        //     let objectAtPath = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
+        //     if (!objectAtPath) {
+        //         return; // Maybe scene isn't ready yet
+        //     }
+        //     this.glowingMaterial = objectAtPath.material;
+        //     // var material = mesh.material;
 
-            this.sg.bloomPass1.strength = 1.1;
-            this.sg.bloomPass1.radius = 0.4;
+        //     // this.sg.bloomPass1.strength = 1.1;
+        //     // this.sg.bloomPass1.radius = 0.4;
 
-            // Store original colors of all materials
-            this.originalMaterialColors = new Map();
-            // Iterate through all objects in the scene and store their original materials
-            this.scene.traverse((object) => {
-                if (object.isMesh && object.material) {
-                    this.originalMaterialColors.set(object, object.material.color.clone());
-                }
-            });
+        //     // Store original colors of all materials
+        //     this.originalMaterialColors = new Map();
+        //     // Iterate through all objects in the scene and store their original materials
+        //     this.scene.traverse((object) => {
+        //         if (object.isMesh && object.material) {
+        //             this.originalMaterialColors.set(object, object.material.color.clone());
+        //         }
+        //     });
 
-            this.firstTimeMaterialSetupDone = true;
-        } else {
-            // we saved all of the original materials and set up the bloom filter, time to
-            // do the render passes
+        //     this.firstTimeMaterialSetupDone = true;
+        // } else {
+        //     // we saved all of the original materials and set up the bloom filter, time to
+        //     // do the render passes
 
-            // Set the color of all materials to black (so only bloomed ones appear)
-            this.originalMaterialColors.forEach((originalColor, object) => {
-                object.material.color.set(0x000000);
-            });
-            this.glowingMaterial.color.set(0xFFFF00); // bloomed material
+        //     // Set the color of all materials to black (so only bloomed ones appear)
+        //     this.originalMaterialColors.forEach((originalColor, object) => {
+        //         object.material.color.set(0x000000);
+        //     });
+        //     this.glowingMaterial.color.set(0xFFFF00); // bloomed material
 
-            this.sg.bloom1.render();
+        //     // this.sg.bloom1.render();
 
-            // Restore the original colors of all materials now and render the final image
-            // (except for the bloomed one, no need to render it now)
-            this.originalMaterialColors.forEach((originalColor, object) => {
-                object.material.color.copy(originalColor);
-            });
-            this.glowingMaterial.color.set(0x000000);
-        }
+        //     // Restore the original colors of all materials now and render the final image
+        //     // (except for the bloomed one, no need to render it now)
+        //     this.originalMaterialColors.forEach((originalColor, object) => {
+        //         object.material.color.copy(originalColor);
+        //     });
+        //     this.glowingMaterial.color.set(0x000000);
+        // }
 
-        this.sg.final.render();
-        // this.render(); // no longer use this, use the bloom wrapper instead
+        // this.sg.final.render();
+        this.render(); // no longer use this, use the bloom wrapper instead
 
         this.prevTime = time;
 
@@ -347,7 +396,7 @@ export class Viewer {
             // Overridden starting values to move the camera a bit farther away from the object
             this.defaultCamera.position.x += size / 1.5;
             this.defaultCamera.position.y += size / 5.0;
-            this.defaultCamera.position.z += size / 1.5;
+            this.defaultCamera.position.z += size / 1.1;
             this.defaultCamera.lookAt(center);
 
         }
@@ -640,9 +689,9 @@ export class Viewer {
             lightFolder.addColor(this.state, 'directColor')
         ].forEach((ctrl) => ctrl.onChange(() => this.updateLights()));
 
-        let bp1 = gui.addFolder("bloomPass");
-        bp1.add(this.sg.bloomPass1, "strength", 0.0, 10.0);
-        bp1.add(this.sg.bloomPass1, "radius", 0.0, 1.0);
+        // let bp1 = gui.addFolder("bloomPass");
+        // bp1.add(this.sg.bloomPass1, "strength", 0.0, 10.0);
+        // bp1.add(this.sg.bloomPass1, "radius", 0.0, 1.0);
 
         // Animation controls.
         this.animFolder = gui.addFolder('Animation');

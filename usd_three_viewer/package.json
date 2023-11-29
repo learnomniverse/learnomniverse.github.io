@@ -25,7 +25,7 @@
         "test": "node test/gen_test.js",
         "deploy": "npm run build && vercel --local-config vercel.json --prod",
         "postversion": "git push && git push --tags",
-        "copy-gltf-assets": "cp usd_logo.glb dist/usd_logo.glb",
+        "copy-gltf-assets": "cp ov_logo.glb dist/ov_logo.glb",
         "deploy-to-mdbook": "rm -rf ../src/usd_three_viewer && mkdir ../src/usd_three_viewer && cp -r ./dist/* ../src/usd_three_viewer",
         "fixup-paths-for-mdbook": "find ../src/usd_three_viewer/ -type f -exec sed -i 's/\\/assets\\//\\/usd_three_viewer\\/assets\\//g' {} +"
     },

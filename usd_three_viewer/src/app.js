@@ -159,7 +159,7 @@ class App {
         }
 
         // Replace 'your-binary-file.bin' with the actual filename of your binary file
-        const fileName = 'usd_logo.glb';
+        const fileName = 'ov_logo.glb';
         const fileUrl = './assets/../' + fileName; // Assuming the file is in the same directory as your HTML file
 
         // Fetch the binary file
@@ -172,7 +172,7 @@ class App {
 
                 // Create a Map object with the file
                 const fileMap = new Map();
-                fileMap.set('usd_logo.glb', file);
+                fileMap.set('ov_logo.glb', file);
 
                 // Call the load function with the fileMap
                 this.load(fileMap);
