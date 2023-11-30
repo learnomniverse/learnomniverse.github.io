@@ -19,12 +19,13 @@
         ]
     },
     "scripts": {
-        "dev": "vite --port 3000",
-        "build": "vite build && npm run copy-gltf-assets && npm run deploy-to-mdbook && npm run fixup-paths-for-mdbook",
+        "dev": "npm run build && vite --port 3000",
+        "build": "vite build && npm run copy-gltf-assets && npm run copy-videos && npm run deploy-to-mdbook && npm run fixup-paths-for-mdbook",
         "clean": "rimraf dist/**",
         "test": "node test/gen_test.js",
         "deploy": "npm run build && vercel --local-config vercel.json --prod",
         "postversion": "git push && git push --tags",
+        "copy-videos": "mkdir -p dist/videos && cp -r videos/* dist/videos",
         "copy-gltf-assets": "cp ov_logo.glb dist/ov_logo.glb",
         "deploy-to-mdbook": "rm -rf ../src/usd_three_viewer && mkdir ../src/usd_three_viewer && cp -r ./dist/* ../src/usd_three_viewer",
         "fixup-paths-for-mdbook": "find ../src/usd_three_viewer/ -type f -exec sed -i 's/\\/assets\\//\\/usd_three_viewer\\/assets\\//g' {} +"

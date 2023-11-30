@@ -22,7 +22,9 @@ import {
     PlaneGeometry,
     Mesh,
     MeshBasicMaterial,
-    DoubleSide
+    DoubleSide,
+    VideoTexture,
+    SRGBColorSpace
 } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -138,27 +140,153 @@ export class Viewer {
         this.addGUI();
         if (options.kiosk) this.gui.close();
 
-        // Create flying orbital screens
-        {
-            // Create a basic material with a red color
-            var basicMaterial = new MeshBasicMaterial({ color: 0xf22ff0 });
-            // Set the opacity to 1 and the transparent to false
-            basicMaterial.opacity = 1;
-            basicMaterial.transparent = false;
-            // Set the side to double-sided
-            basicMaterial.side = DoubleSide;
 
+        let videosList = [
+            "elephant.mp4",
+            // "livesync.mp4"
+        ];
+
+        // Create a video tag in the body
+        let createVideoTagInBody = (videoSrc) => {
+            // Create a video element
+            var video = document.createElement("video");
+
+            // Set the id, loop, crossOrigin, and playsinline attributes
+            video.id = videoSrc;
+            video.loop = true;
+            video.playsInline = true;
+            video.autoplay = true;
+            video.muted = true;
+            video.preload = "auto";
+
+            // Set the style attribute to hide the video element
+            video.style.display = "none";
+
+            // Create a source element
+            var source = document.createElement("source");
+
+            // Set the src and type attributes
+            source.src = videoSrc;
+            source.type = "video/mp4";
+
+            // Append the source element to the video element
+            video.appendChild(source);
+
+            // Append the video element to the body element
+            document.body.appendChild(video);
+
+            return video;
+        };
+
+
+        // Video materials to use
+        let allMeshVideoMaterials = [];
+
+        videosList.forEach((videoFilename) => {
+            let video = createVideoTagInBody("videos/" + videoFilename);
+            // Workaround for autplaying videos
+            setTimeout(() => {
+                video.play();
+            }, 1);
+
+            const texture = new VideoTexture(video);
+            texture.colorSpace = SRGBColorSpace;
+            const videoMaterial = new MeshBasicMaterial({ map: texture });
+            videoMaterial.side = DoubleSide;
+            videoMaterial.opacity = 0.8;
+            videoMaterial.transparent = true;
+            allMeshVideoMaterials.push(videoMaterial);
+        });
+
+
+        // // Add an event listener for the focus event on the window object
+        // window.addEventListener("load", function () {
+        //     // Try to play the video
+        //     console.log("YEAH PLAY");
+        //     video.play().catch(function (error) {
+        //         // Handle any errors that may occur
+        //         console.error(error);
+        //     });
+        // });
+
+        // // Add an event listener for the blur event on the window object
+        // window.addEventListener("blur", function () {
+        //     // Pause the video
+        //     video.pause();
+        // });
+
+
+
+
+        // // link webcam up
+        // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+        //     const constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+
+        //     navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
+
+        //         // apply the stream to the video element used in the texture
+
+        //         video.srcObject = stream;
+        //         video.play();
+
+        //     }).catch(function (error) {
+
+        //         console.error('Unable to access the camera/webcam.', error);
+
+        //     });
+
+        // } else {
+
+        //     console.error('MediaDevices interface not available.');
+
+        // }
+
+        let getArrayRandomElementIndex = (array) => {
+            if (array.length === 0) {
+                // Return null or handle the empty array case
+                return null;
+            }
+
+            const randomIndex = Math.floor(Math.random() * array.length);
+            return randomIndex;
+        };
+
+        // Create all the flying orbital screens
+        {
 
             let createCircumferenceOfScreens = (y_ring_coordinate, radius) => {
                 // Create an array of screens and add them to the scene
                 var screens = [];
                 var numScreens = 15; // The number of screens to create
                 var angle = (2 * Math.PI) / numScreens; // The angle between each screen
+                var curvedScreenFactor = 0.02;
 
+                // Bend a plane geometry inward (z-coord) according to a factor.
+                // Gives the appearance of a 'curved flat screen'
+                let planeCurve = (planeGeometry, factor) => {
+                    let p = planeGeometry.parameters;
+                    let hw = p.width * 0.5; // half width
+                    let hh = p.height * 0.5; // half height
+                    let positions = planeGeometry.attributes.position.array;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        let x = positions[i]; // x coordinate
+                        // let y = positions[i + 1]; // y coordinate
+                        // let z = positions[i + 2]; // z coordinate
+                        let c = Math.cos(x / hw); // cosine value
+                        positions[i + 2] = positions[i + 2] - factor * c; // z coordinate
+                    }
+                    planeGeometry.computeVertexNormals(); // update normals
+                };
+
+                // Create the screens on the ring
                 for (var i = 0; i < numScreens; i++) {
                     // Create a screen geometry and a mesh
                     var screenGeometry = new PlaneGeometry(0.2, 0.2, 10, 10);
-                    var screenMesh = new Mesh(screenGeometry, basicMaterial);
+                    planeCurve(screenGeometry, curvedScreenFactor); // bend the plane a bit
+                    // Get a random video material
+                    let randomIndex = getArrayRandomElementIndex(allMeshVideoMaterials);
+                    var screenMesh = new Mesh(screenGeometry, allMeshVideoMaterials[randomIndex]);
 
                     // Position the screen on the sphere
                     var x = radius * Math.cos(i * angle) * Math.sqrt(1 - y_ring_coordinate * y_ring_coordinate / (radius * radius));
@@ -187,6 +315,7 @@ export class Viewer {
         this.animate = this.animate.bind(this);
         requestAnimationFrame(this.animate);
         window.addEventListener('resize', this.resize.bind(this), false);
+        this.resize();
     }
 
     animate(time) {
@@ -396,7 +525,7 @@ export class Viewer {
             // Overridden starting values to move the camera a bit farther away from the object
             this.defaultCamera.position.x += size / 1.5;
             this.defaultCamera.position.y += size / 5.0;
-            this.defaultCamera.position.z += size / 1.1;
+            this.defaultCamera.position.z += size / 1.0;
             this.defaultCamera.lookAt(center);
 
         }
