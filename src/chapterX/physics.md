@@ -1,0 +1,1 @@
+physx course! start from rigidbodies and work your way up... read physx sdk and do the same in OV, even better if with native ext
