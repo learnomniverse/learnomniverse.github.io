@@ -142,8 +142,20 @@ export class Viewer {
 
 
         let videosList = [
+            "audio2face.mp4",
+            "datacenter2.mp4",
+            "datacenter.mp4",
             "elephant.mp4",
-            // "livesync.mp4"
+            "factory.mp4",
+            "livesync.mp4",
+            "physics.mp4",
+            "racerx.mp4",
+            "spaceship.mp4",
+            "springsig.mp4",
+            "sword.mp4",
+            "train.mp4",
+            "vr.mp4",
+            "wind.mp4"
         ];
 
         // Create a video tag in the body
@@ -185,9 +197,15 @@ export class Viewer {
         videosList.forEach((videoFilename) => {
             let video = createVideoTagInBody("videos/" + videoFilename);
             // Workaround for autplaying videos
-            setTimeout(() => {
-                video.play();
-            }, 1);
+            // Wait for metadata to be loaded
+            const delay = Math.random() * 1000;
+            video.addEventListener('loadedmetadata', function () {
+                // Workaround for autplaying videos
+                setTimeout(() => {
+                    video.play();
+                    // video.currentTime = Math.random() * video.duration;
+                }, delay);
+            });
 
             const texture = new VideoTexture(video);
             texture.colorSpace = SRGBColorSpace;
@@ -254,6 +272,7 @@ export class Viewer {
 
         // Create all the flying orbital screens
         {
+            let currentVideoIndex = 0;
 
             let createCircumferenceOfScreens = (y_ring_coordinate, radius) => {
                 // Create an array of screens and add them to the scene
@@ -280,12 +299,16 @@ export class Viewer {
                 };
 
                 // Create the screens on the ring
+                let previousIndex = -1;
                 for (var i = 0; i < numScreens; i++) {
                     // Create a screen geometry and a mesh
                     var screenGeometry = new PlaneGeometry(0.2, 0.2, 10, 10);
                     planeCurve(screenGeometry, curvedScreenFactor); // bend the plane a bit
-                    // Get a random video material
-                    let randomIndex = getArrayRandomElementIndex(allMeshVideoMaterials);
+                    // Get a random video material, just make sure two are not equals close to each other on the same row
+                    let randomIndex = Math.floor((Math.random() * allMeshVideoMaterials.length) % allMeshVideoMaterials.length);
+                    if (randomIndex == previousIndex)
+                        randomIndex++;
+                    previousIndex = randomIndex;
                     var screenMesh = new Mesh(screenGeometry, allMeshVideoMaterials[randomIndex]);
 
                     // Position the screen on the sphere

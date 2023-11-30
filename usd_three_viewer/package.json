@@ -28,7 +28,7 @@
         "copy-videos": "mkdir -p dist/videos && cp -r videos/* dist/videos",
         "copy-gltf-assets": "cp ov_logo.glb dist/ov_logo.glb",
         "deploy-to-mdbook": "rm -rf ../src/usd_three_viewer && mkdir ../src/usd_three_viewer && cp -r ./dist/* ../src/usd_three_viewer",
-        "fixup-paths-for-mdbook": "find ../src/usd_three_viewer/ -type f -exec sed -i 's/\\/assets\\//\\/usd_three_viewer\\/assets\\//g' {} +"
+        "fixup-paths-for-mdbook": "find ../src/usd_three_viewer/ -type f -exec sed -i 's/\\/assets\\//\\/usd_three_viewer\\/assets\\//g' {} + && find ../src/usd_three_viewer/ -type f -exec sed -i 's/videos\\//\\/usd_three_viewer\\/videos\\//g' {} +"
     },
     "dependencies": {
         "dat.gui": "^0.7.9",
