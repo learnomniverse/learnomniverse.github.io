@@ -24,7 +24,8 @@ import {
     MeshBasicMaterial,
     DoubleSide,
     VideoTexture,
-    SRGBColorSpace
+    SRGBColorSpace,
+    MeshPhongMaterial
 } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -84,7 +85,7 @@ export class Viewer {
             toneMapping: LinearToneMapping,
             ambientIntensity: 0.3,
             ambientColor: '#FFFFFF',
-            directIntensity: 0.8 * Math.PI, // TODO(#116)
+            directIntensity: 0.6 * Math.PI, // TODO(#116)
             directColor: '#FFFFFF',
             bgColor: '#191919',
         };
@@ -121,7 +122,7 @@ export class Viewer {
         this.controls = new OrbitControls(this.defaultCamera, this.renderer.domElement);
         this.controls.screenSpacePanning = true;
 
-        // this.sg = new SelectiveGlow(this.scene, this.defaultCamera, this.renderer);
+        this.sg = new SelectiveGlow(this.scene, this.defaultCamera, this.renderer);
         // console.log(this.sg);
 
         this.el.appendChild(this.renderer.domElement);
@@ -372,50 +373,60 @@ export class Viewer {
             return currentObject; // Return the object at the specified path
         }
 
-        // if (this.firstTimeMaterialSetupDone == false) {
-        //     // var mesh = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
-        //     let objectAtPath = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
-        //     if (!objectAtPath) {
-        //         return; // Maybe scene isn't ready yet
-        //     }
-        //     this.glowingMaterial = objectAtPath.material;
-        //     // var material = mesh.material;
+        if (this.firstTimeMaterialSetupDone == false) {
+            // var mesh = getObjectByPath(this.scene, "/Scene/Lit_plane_front");
+            let objectAtPath = getObjectByPath(this.scene, "/Scene/omniverse_logo");
+            if (!objectAtPath) {
+                return; // Maybe scene isn't ready yet
+            }
 
-        //     // this.sg.bloomPass1.strength = 1.1;
-        //     // this.sg.bloomPass1.radius = 0.4;
+            // Change the default material first, it's ugly
+            objectAtPath.material = new MeshPhongMaterial({
+                specular: 0xffffff,
+                shininess: 10,
+                reflectivity: 1.0
+            });
 
-        //     // Store original colors of all materials
-        //     this.originalMaterialColors = new Map();
-        //     // Iterate through all objects in the scene and store their original materials
-        //     this.scene.traverse((object) => {
-        //         if (object.isMesh && object.material) {
-        //             this.originalMaterialColors.set(object, object.material.color.clone());
-        //         }
-        //     });
 
-        //     this.firstTimeMaterialSetupDone = true;
-        // } else {
-        //     // we saved all of the original materials and set up the bloom filter, time to
-        //     // do the render passes
+            // now store it for bloom
+            this.glowingMaterial = objectAtPath.material;
+            // var material = mesh.material;
 
-        //     // Set the color of all materials to black (so only bloomed ones appear)
-        //     this.originalMaterialColors.forEach((originalColor, object) => {
-        //         object.material.color.set(0x000000);
-        //     });
-        //     this.glowingMaterial.color.set(0xFFFF00); // bloomed material
+            this.sg.bloomPass1.strength = 0.5;
+            this.sg.bloomPass1.radius = 1.2;
 
-        //     // this.sg.bloom1.render();
+            // Store original colors of all materials
+            this.originalMaterialColors = new Map();
+            // Iterate through all objects in the scene and store their original materials
+            this.scene.traverse((object) => {
+                if (object.isMesh && object.material) {
+                    this.originalMaterialColors.set(object, object.material.color.clone());
+                }
+            });
 
-        //     // Restore the original colors of all materials now and render the final image
-        //     // (except for the bloomed one, no need to render it now)
-        //     this.originalMaterialColors.forEach((originalColor, object) => {
-        //         object.material.color.copy(originalColor);
-        //     });
-        //     this.glowingMaterial.color.set(0x000000);
-        // }
+            this.firstTimeMaterialSetupDone = true;
+        } else {
+            // we saved all of the original materials and set up the bloom filter, time to
+            // do the render passes
 
-        // this.sg.final.render();
-        this.render(); // no longer use this, use the bloom wrapper instead
+            // Set the color of all materials to black (so only bloomed ones appear)
+            this.originalMaterialColors.forEach((originalColor, object) => {
+                object.material.color.set(0x000000);
+            });
+            this.glowingMaterial.color.set(0x00FF00); // bloomed material
+
+            this.sg.bloom1.render();
+
+            // Restore the original colors of all materials now and render the final image
+            // (except for the bloomed one, no need to render it now)
+            this.originalMaterialColors.forEach((originalColor, object) => {
+                object.material.color.copy(originalColor);
+            });
+            this.glowingMaterial.color.set(0x000000);
+        }
+
+        this.sg.final.render();
+        // this.render(); // no longer use this, use the bloom wrapper instead
 
         this.prevTime = time;
 
@@ -676,7 +687,7 @@ export class Viewer {
         this.defaultCamera.add(light1);
 
         const light2 = new DirectionalLight(state.directColor, state.directIntensity);
-        light2.position.set(0.5, 0, 0.866); // ~60º
+        light2.position.set(15.5, 19, 15.866); // ~60º
         light2.name = 'main_light';
         this.defaultCamera.add(light2);
 
@@ -841,9 +852,9 @@ export class Viewer {
             lightFolder.addColor(this.state, 'directColor')
         ].forEach((ctrl) => ctrl.onChange(() => this.updateLights()));
 
-        // let bp1 = gui.addFolder("bloomPass");
-        // bp1.add(this.sg.bloomPass1, "strength", 0.0, 10.0);
-        // bp1.add(this.sg.bloomPass1, "radius", 0.0, 1.0);
+        let bp1 = gui.addFolder("bloomPass");
+        bp1.add(this.sg.bloomPass1, "strength", 0.0, 10.0);
+        bp1.add(this.sg.bloomPass1, "radius", 0.0, 1.0);
 
         // Animation controls.
         this.animFolder = gui.addFolder('Animation');
