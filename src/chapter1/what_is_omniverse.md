@@ -27,7 +27,7 @@ Omniverse users are welcome to sell their extensions for whatever they please. T
 
 So programmers are free to write and sell their Omniverse extensions. Users can buy and use those extensions as long as they do it abiding by the Omniverse license (i.e. if they're working as a team of 20 people with Omniverse, an enterprise license must be purchased). If they're working as individuals (or teams of 2 people), no license is necessary and Omniverse is totally free.
 
-What about 3D content I create with e.g. Omniverse Composer? Can I sell a rendered video of a Physical simulation made with Omniverse?
+What about 3D content I create with e.g. Omniverse Composer (we will take a look at this in the next section)? Can I sell a rendered video of a Physical simulation made with Omniverse?
 
 ```admonish quote
 Content and or code\extensions\apps created using OVI (Omniverse Individual license, i.e. abiding by the 2-users-tops requirement) for small teams, using desktops or cloud resources is allowed and can be used for commercial purposes.

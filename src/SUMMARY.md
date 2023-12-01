@@ -6,6 +6,7 @@
 
 - [Chapter 1]()
   - [What is Omniverse](./chapter1/what_is_omniverse.md)
+  - [Kit Applications](./chapter1/kit_applications.md)
 - []()
 -----------
 
