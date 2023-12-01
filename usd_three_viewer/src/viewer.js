@@ -305,7 +305,7 @@ export class Viewer {
                     var screenGeometry = new PlaneGeometry(0.2, 0.2, 10, 10);
                     planeCurve(screenGeometry, curvedScreenFactor); // bend the plane a bit
                     // Get a random video material, just make sure two are not equals close to each other on the same row
-                    let randomIndex = Math.floor((Math.random() * allMeshVideoMaterials.length) % allMeshVideoMaterials.length);
+                    let randomIndex = getArrayRandomElementIndex(allMeshVideoMaterials);
                     if (randomIndex == previousIndex)
                         randomIndex++;
                     previousIndex = randomIndex;
