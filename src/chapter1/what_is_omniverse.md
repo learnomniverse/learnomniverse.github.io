@@ -2,10 +2,12 @@
 Omniverse is a platform and a series of technologies developed by NVIDIA around the USD standard (although they’re rapidly evolving in other directions as well).
 
 ```admonish warning title="Learn OpenUSD before Omniverse"
-Understanding the USD format is key to understanding many features of Omniverse. It is **highly encouraged** to learn more about OpenUSD [in this dedicated book about OpenUSD](https://learnusd.github.io) before proceeding on to studying Omniverse.
+Understanding the USD format is key to understanding many features of Omniverse and unlock its full potential.
+
+It is **highly encouraged** to learn more about OpenUSD [in this dedicated book](https://learnusd.github.io) before proceeding on to studying Omniverse.
 ```
 
-At a thousand-feet overview, Omniverse can be defined as a vast _customizable_ framework of technologies and applications to work with 3D graphics, collaborating on creating 3D assets and scenes, using AI to create stunning visual effects or improve the process of creating 3D contents, adding real-time and physically correct physics behaviors to 3D contents, rendering in a physically-correct way with ray tracing or path tracing in real-time, etc.
+At a thousand feet overview, Omniverse can be defined as a vast _customizable_ framework of technologies and applications to work with 3D graphics, collaborating on creating 3D assets and scenes, using AI to create stunning visual effects or improve the process of creating 3D contents, adding real-time and physically correct physics behaviors to 3D contents, rendering in a physically-correct way with ray tracing or path tracing in real-time, etc.
 
 NVIDIA doesn’t impose any workflow or dictate how Omniverse tools and technologies should be used (they can be used to create photorealistic render images that you later use commercially, they can be used to let multiple 3D artists work on a 3D scene simultaneously without interfering with each other’s modifications, they can be used to ‘predict’ the mechanical ‘wear’ in a ‘digital twin’ 3D representation of a mechanical part in 3D with accurate physics after many simulation steps, they can be used to create a [server-side web service](https://docs.omniverse.nvidia.com/dev-guide/latest/programmer_ref/services.html) which renders something complex and streams the result as a video back to the user’s browser, etc.).
 

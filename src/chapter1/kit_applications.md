@@ -21,9 +21,9 @@ $ curl -s http://127.0.0.1:33480/components # Perform a simple GET request
 "root":"/home/alex/.local/share/ov/pkg/create-2023.3.0-beta","args":["-q"]}}],"newlyInstalled":false,"packages":[]}]
 ```
 
-The json output can obviously be parsed with `jq` or similar tools and used in automation scripts.
+The json output can obviously be parsed with `jq` or similar tools and used in automation scripts. The `http://127.0.0.1:33480` address will also open the `Exchange` UI in a browser.
 
-The second listed port is a http listening port (so it can be accessed in any browser via `http://127.0.0.1:34080`) for the [Omniverse Navigator](https://docs.omniverse.nvidia.com/navigator/latest/index.html) but we'll take a look at Nucleus at a later time.
+The second listed port is another listening port (so it can be accessed in any browser via `http://127.0.0.1:34080`) for the [Omniverse Navigator](https://docs.omniverse.nvidia.com/navigator/latest/index.html) - the same can also be accessed in the launcher `Nucleus` tab - but we'll take a look at Nucleus at a later time.
 
 ## Composer & Presenter
 

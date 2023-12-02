@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Add a book title
         var bookTitle = document.createElement('h1');
-        bookTitle.textContent = 'Learn OpenUSD';
+        bookTitle.textContent = 'Learn Omniverse';
         bookTitle.style.fontFamily = 'Arial, sans-serif';
         bookTitle.style.fontSize = '32px';
         titlePageDiv.appendChild(bookTitle);

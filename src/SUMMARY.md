@@ -7,6 +7,11 @@
 - [Chapter 1]()
   - [What is Omniverse](./chapter1/what_is_omniverse.md)
   - [Kit Applications](./chapter1/kit_applications.md)
+  - [Nucleus and Connectors](./chapter1/nucleus_and_connectors.md)
+- [Chapter 2]()
+  - [Extensions](./chapter2/extensions.md)
+  - [Python Extensions](./chapter2/python_extensions.md)
+  - [C++ Extensions](./chapter2/cpp_extensions.md)
 - []()
 -----------
 
