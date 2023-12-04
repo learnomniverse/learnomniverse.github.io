@@ -11,6 +11,7 @@
 - [Chapter 2]()
   - [Extensions](./chapter2/extensions.md)
   - [Python Extensions](./chapter2/python_extensions.md)
+  - [Repo Tools Framework](./chapter2/repo_man.md)
   - [C++ Extensions](./chapter2/cpp_extensions.md)
 - []()
 -----------
