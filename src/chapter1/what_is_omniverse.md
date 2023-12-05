@@ -65,3 +65,7 @@ Omniverse is vast and asking for help is often of paramount importance.
 Official channels to learn more about Omniverse, post questions regarding its official applications and main extensions (e.g. related to omni.physx) and get in touch with the great NVIDIA Omniverse community (friendly and available, NVIDIA is doing its best to foster a good community) are the [Omniverse discord server](https://forums.developer.nvidia.com/t/omniverse-discord-server-is-live/178422), the [YouTube Omniverse channel](https://www.youtube.com/c/nvidiaomniverse), the [developer blog articles](https://developer.nvidia.com/blog/tag/omniverse/) and, for critical bugs/issues, the [official Omniverse forum](https://forums.developer.nvidia.com/c/omniverse/) (less chatty, more support-y).
 
 Any non-Omniverse related question should not be asked in the above channels but rather in the [NVIDIA customer support forum](https://www.nvidia.com/en-us/support/).
+
+```admonish tip title="Take advantage of the supportive Omniverse Community!"
+Readers are **highly encouraged** to take advantage of these support resources as it'll make their journey into the Omniverse ecosystem a lot easier and, if you're developing connectors or extensions for your business, provide the technical support and expertise to accomplish your goals.
+```
