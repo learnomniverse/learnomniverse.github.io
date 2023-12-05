@@ -13,6 +13,7 @@
   - [Python Extensions](./chapter2/python_extensions.md)
   - [Repo Tools Framework](./chapter2/repo_man.md)
   - [C++ Extensions](./chapter2/cpp_extensions.md)
+  - [Mixed Extensions](./chapter2/mixed_extensions.md)
 - []()
 -----------
 

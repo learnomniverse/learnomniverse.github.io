@@ -146,7 +146,6 @@ SCRIPT_DIR=$(dirname ${BASH_SOURCE})
 exec "$SCRIPT_DIR/../../kit/kit" "$SCRIPT_DIR/my_name.my_app.kit" "$@"
 ```
 
-
 When it comes to [packaging an extension](https://docs.omniverse.nvidia.com/dev-guide/latest/dev_guide/package/package.html) to redistribute a single zip file though, especially if the extension is C++ or Hybrid (so it _does_ require building as opposed to a simple Python extension), the `repo_man` collection of tools can be quite useful (`repo_man` gets downloaded via `packman` and invokes the right scripting tools like `repo_build` for OV native/hybrid extensions building, `repo_package` to create packages for extensions, `repo_licensing` for gathering and validating licenses of your dependencies, `repo_format` for py/C++ code linting via clang-format and pyblack, etc.).
 
 Last piece of the puzzle is the packaging of this `kit-project-template` extension: as stated in the `README.md` to package it with this project skeleton just run `tools/package.(bat|sh)` (or `repo package` which invokes, under the hood, exactly the same tool: `tools/packman/python.sh tools/repoman/repoman.py package`, i.e. "use the python interpreter found/downloaded by packman, invoke repoman and execute the 'package' command"). The package will be created in the `_build/packages` folder.

@@ -1,0 +1,1 @@
+mention that users for now can either set up their CDN, bundle them in `data`
