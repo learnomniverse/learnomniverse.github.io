@@ -109,7 +109,7 @@ The [`kit-project-template`](https://github.com/NVIDIA-Omniverse/kit-project-tem
 
 Quoting from the [official docs](https://docs.omniverse.nvidia.com/kit/docs/kit-template/latest/content.html):
 
-> During build phase extensions are built (native), staged (copied and linked) into _build/{platform}/{config}/exts folder. Custom app (.kit file config) is used to enable those extensions.
+> During build phase extensions are built (native), staged (copied and linked) into `_build/{platform}/{config}/exts` folder. Custom app (.kit file config) is used to enable those extensions.
 >
 > **Each extension is a folder (or zip archive) in the end. You can write user code in python code only, or C++ only, or both. Ultimately extension archive could contain python code, python bindings (pyd/so files) and C++ plugins (dll/so).** Each binary file is platform and configuration (debug/release) specific. For python bindings naming we follow Python standards.
 

@@ -102,7 +102,9 @@ Omniverse extensions often uses `premake` to parse their project definition scri
 Under the hood `repo_man` invokes the `repo_build` tool that does something like
 
 ```bash
-/tmp/kit-extension-template-cpp/_build/host-deps/premake/premake5 --file=/tmp/kit-extension-template-cpp/premake5.lua gmake2 --platform-host=linux-x86_64 --scripts=/home/alex/packman-repo/chk/repo_build/0.44.6/lua --verbose --solution-name=kit-extension-template-cpp --os=linux
+/tmp/kit-extension-template-cpp/_build/host-deps/premake/premake5 --file=/tmp/kit-extension-template-cpp/premake5.lua gmake2
+  --platform-host=linux-x86_64 --scripts=/home/alex/packman-repo/chk/repo_build/0.44.6/lua --verbose
+  --solution-name=kit-extension-template-cpp --os=linux
 ```
 
 to automatically add the extensions' `premake5.lua` files to be parsed. The extensions to be built should reside in `<repo_root>/source/extensions/*` - take a look at the `repo_kit_tools` tool-provided lua script `_repo/deps/repo_kit_tools/kit-template/premake5-kit.lua`:
@@ -434,19 +436,19 @@ The code above is a lower level carbonite plugin and **not** Omniverse extension
 In general: if you use carbonite function pointers in your interface:
 ```cpp
 struct IMyCarboniteInterface {
-      CARB_PLUGIN_INTERFACE("my_custom_plugin::IMyCarboniteInterface", 0, 1);
+  CARB_PLUGIN_INTERFACE("my_custom_plugin::IMyCarboniteInterface", 0, 1);
 
-      void(CARB_ABI* some_method_to_print_stuff_from_my_cpp_code)();
-    };
+  void(CARB_ABI* some_method_to_print_stuff_from_my_cpp_code)();
+};
 ```
 you should populate them at `fillInterface()` time or callers will erroneously call unbound methods.
 If you define carbonite interfaces as base classes with pure virtual calls:
 ```cpp
 class IExampleUsdInterface {
 public:
-    CARB_PLUGIN_INTERFACE("omni::example::cpp::usd::IExampleUsdInterface", 1, 0);
+  CARB_PLUGIN_INTERFACE("omni::example::cpp::usd::IExampleUsdInterface", 1, 0);
 
-    virtual void createPrims() = 0; // Create some example prim in the current USD context using C++
+  virtual void createPrims() = 0; // Create some example prim in the current USD context using C++
 };
 ```
 (just like the previous example with `omni::ext::IExt` does), then you should subclass that class and implement the required methods. And the `fillInterface()` symbol must be defined but the function can be empty:
@@ -458,8 +460,8 @@ public:
   }
 }
 CARB_PLUGIN_IMPL(pluginImplDesc, omni::example::cpp::usd::ExampleCppUsdExtension)
-void fillInterface(omni::example::cpp::usd::ExampleCppUsdExtension& iface)
-{
+void fillInterface(omni::example::cpp::usd::ExampleCppUsdExtension& iface) {
+  // Empty
 }
 ```
 
