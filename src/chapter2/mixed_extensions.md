@@ -1,9 +1,9 @@
 # Mixed/Hybrid Omniverse C++ and Python extensions
 
 ```admonish tip title="GitHub Code"
-<p style="display: flex; align-items: center;">
-  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px;" />
-  All the code in this section is available in the public NVIDIA repository:&nbsp;<a href="https://github.com/NVIDIA-Omniverse/kit-extension-template-cpp">kit-extension-template-cpp</a>. Read on for an in-depth explanation.
+<p style="display: flex; align-items: center; flex-wrap: wrap; text-align: left;">
+  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px; margin-bottom: 10px;" />
+  <span style="flex: 1;">All the code in this section is available in the public NVIDIA repository:&nbsp;<a href="https://github.com/NVIDIA-Omniverse/kit-extension-template-cpp">kit-extension-template-cpp</a>. Read on for an in-depth explanation.</span>
 </p>
 ```
 

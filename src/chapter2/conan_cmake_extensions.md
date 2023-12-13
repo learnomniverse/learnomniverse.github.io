@@ -1,10 +1,9 @@
 # A mixed(hybrid) extension based on Conan and CMake
 
 ```admonish tip title="GitHub Code"
-<p style="display: flex; align-items: center;">
-  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px;" />
-  All the code in this section is available in this book's repository:&nbsp;<a href="https://github.com/learnomniverse/conan_cmake_template">conan_cmake_template</a>. Read on for an in-depth explanation.
-</p>
+<p style="display: flex; align-items: center; flex-wrap: wrap; text-align: left;">
+  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px; margin-bottom: 10px;" />
+  <span style="flex: 1;">All the code in this section is available in this book's repository:&nbsp;<a href="https://github.com/learnomniverse/conan_cmake_template" style="text-decoration: none;">conan_cmake_template</a>. Read on for an in-depth explanation. </span></p>
 ```
 
 Let's now present an alternate way of developing C++/Python Omniverse extensions by leveraging [Conan](https://conan.io/) for dependency management and [CMake](https://cmake.org/) as build system.

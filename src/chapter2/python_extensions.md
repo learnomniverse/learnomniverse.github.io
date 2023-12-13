@@ -1,14 +1,14 @@
 # Python Extensions
 
 ```admonish tip title="GitHub Code"
-<p style="display: flex; align-items: center;">
-  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px;" />
-  All the code in this section is available in public NVIDIA repositories:
+<p style="display: flex; align-items: center; flex-wrap: wrap; text-align: left;">
+  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px; margin-bottom: 10px;" />
+  <span style="flex: 1;">All the code in this section is available in public NVIDIA repositories:
   <ul>
     <li><a href="https://github.com/NVIDIA-Omniverse/kit-extension-template">kit-extension-template</a></li>
     <li><a href="https://github.com/NVIDIA-Omniverse/kit-project-template">kit-project-template</a></li>
   </ul>
-  Read on to know the differences and which one you should use for your first extension.
+  Read on to know the differences and which one you should use for your first extension.</span>
 </p>
 ```
 
