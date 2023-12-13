@@ -5,7 +5,7 @@ Having some understanding of the [repo_man build system](../chapter2/repo_man.md
 
 ```admonish tip title="GitHub Code"
 <p style="display: flex; align-items: center;">
-  <img src="../images/chapter2/gh_icon.png" alt="The Rust Logo" width="48px" height="48px" style="margin-right: 10px;" />
+  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px;" />
   All the code in this section is available in the public NVIDIA repository:&nbsp;<a href="https://github.com/NVIDIA-Omniverse/kit-extension-template-cpp">kit-extension-template-cpp</a>. Read on for an in-depth explanation.
 </p>
 ```
@@ -161,7 +161,7 @@ kit-extension-template-cpp/
    ├─ extensions/
       ├─ omni.example.cpp.hello_world/
          ├─ config/ // the 'extension.toml' file lives here. Tokens, which python modules and which C++ plugins
-         |          // are exposed by this extension is specified here along with some copyright, title, UI info
+         |          // are exposed by this extension are specified here along with some copyright, title, UI info
          |          // for the Omniverse Extensions Browser GUI as well.
          ├─ data/ // Binary data for the extension
          ├─ docs/ // Documentation and Changelog for the extension

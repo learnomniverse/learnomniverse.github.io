@@ -14,6 +14,7 @@
   - [Repo Tools Framework](./chapter2/repo_man.md)
   - [C++ Extensions](./chapter2/cpp_extensions.md)
   - [Mixed Extensions](./chapter2/mixed_extensions.md)
+  - [Conan/CMake Extensions](./chapter2/conan_cmake_extensions.md)
 - []()
 -----------
 

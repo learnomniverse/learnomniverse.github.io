@@ -2,7 +2,7 @@
 
 ```admonish tip title="GitHub Code"
 <p style="display: flex; align-items: center;">
-  <img src="../images/chapter2/gh_icon.png" alt="The Rust Logo" width="48px" height="48px" style="margin-right: 10px;" />
+  <img src="../images/chapter2/gh_icon.png" alt="The GitHub Logo" width="48px" height="48px" style="margin-right: 10px;" />
   All the code in this section is available in public NVIDIA repositories:
   <ul>
     <li><a href="https://github.com/NVIDIA-Omniverse/kit-extension-template">kit-extension-template</a></li>
