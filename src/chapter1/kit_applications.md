@@ -60,7 +60,7 @@ Kit is a higher level SDK for building Omniverse applications and extensions. `U
 
 Kit is also responsible for making major components available to extensions:
 
-* USD and Hydra (a rendering engine for USD) - `omni.usd.libs` is the extension that loads the USD native libraries (if you don't know what these are, it is highly recommended that you study [Learn OpenUSD](https://learnusd.github.io/) first before diving more into Omniverse)
+* USD and Hydra (a rendering engine for USD) - `omni.usd.libs` is the extension that loads the USD native libraries (if you don't know what these are, it is highly recommended that you study [Learn OpenUSD](https://omniverseusd.github.io/) first before diving more into Omniverse)
 * Nucleus accessing facilities (this makes collaborating on USD files easier - it's the `Client Library SDK` in the stack image above)
 * Carbonite facilities
 * An advanced RTX renderer

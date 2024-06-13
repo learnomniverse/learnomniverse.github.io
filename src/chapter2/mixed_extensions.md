@@ -96,7 +96,7 @@ protected:
         Kit update event loop fires a recurring update event
 
         Did I mention that learning OpenUSD *before* learning Omniverse can be extremely beneficial?
-        Please read https://learnusd.github.io/chapter4/transformations.html for more information.
+        Please read https://omniverseusd.github.io/chapter4/transformations.html for more information.
        */
        ...
     }
@@ -118,7 +118,7 @@ The code should be rather straightforward after running the extension and seeing
         });
     }
     ```
-* The current stage is detected via a `onDefaultUsdStageChanged()` callback. This is called directly through the Python bindings (so from the Python code) to let the C++ code operate on a valid USD stage (again: if you haven't already, check out [LearnOpenUSD](https://learnusd.github.io) before proceeding further into Omniverse).
+* The current stage is detected via a `onDefaultUsdStageChanged()` callback. This is called directly through the Python bindings (so from the Python code) to let the C++ code operate on a valid USD stage (again: if you haven't already, check out [LearnOpenUSD](https://omniverseusd.github.io) before proceeding further into Omniverse).
 
 Also refer to the [Carbonite API](https://docs.omniverse.nvidia.com/kit/docs/carbonite/latest/api/carbonite_api.html) for more information on this example's code.
 

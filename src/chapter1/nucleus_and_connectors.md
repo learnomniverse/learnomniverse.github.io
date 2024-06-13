@@ -30,7 +30,7 @@ Both users are now able to launch a Kit application like OV Composer, connect to
 
 and pick a USD file (or save one) from that Nucleus server. The other person should do the same and you can both collaborate on the same USD file. Pretty much like `git` or any version control, _checkpoints_ will be generated along with recording the user who did the edit (and it's always possible to go back to a previous modification).
 
-Together with the power of USD layers (and **again: it is highly recommended, if you haven't already, to take a look at the [OpenUSD](https://learnusd.github.io) file format**), Nucleus makes working on graphical assets and scenes an advanced experience.
+Together with the power of USD layers (and **again: it is highly recommended, if you haven't already, to take a look at the [OpenUSD](https://omniverseusd.github.io) file format**), Nucleus makes working on graphical assets and scenes an advanced experience.
 
 For more information refer to the [video guide in the official docs](https://docs.omniverse.nvidia.com/nucleus/latest/index.html): it is both easy to follow and very informative.
 

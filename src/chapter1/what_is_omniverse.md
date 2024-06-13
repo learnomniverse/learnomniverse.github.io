@@ -4,7 +4,7 @@ Omniverse is a platform and a series of technologies developed by NVIDIA around 
 ```admonish warning title="Learn OpenUSD before Omniverse"
 Understanding the USD format is key to understanding many features of Omniverse and unlock its full potential.
 
-It is **highly encouraged** to learn more about OpenUSD [in this dedicated book](https://learnusd.github.io) before proceeding on to studying Omniverse.
+It is **highly encouraged** to learn more about OpenUSD [in this dedicated book](https://omniverseusd.github.io) before proceeding on to studying Omniverse.
 ```
 
 At a thousand feet overview, Omniverse can be defined as a vast _customizable_ framework of technologies and applications to work with 3D graphics, collaborating on creating 3D assets and scenes, using AI to create stunning visual effects or improve the process of creating 3D contents, adding real-time and physically correct physics behaviors to 3D contents, rendering in a physically-correct way with ray tracing or path tracing in real-time, etc.
