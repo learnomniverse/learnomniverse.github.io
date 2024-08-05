@@ -19,39 +19,28 @@ We will dive more into extensions later in this book.
 
 Two things newcomers usually care a lot about: pricing and requirements.
 
-**Omniverse is free to use for individuals, but a license must be purchased for team use**: [Omniverse Licensing](https://www.nvidia.com/en-us/omniverse/download/).
+**Omniverse requires a license, for which there are both free and commercial options**: see [Omniverse Licensing after registration](https://www.nvidia.com/en-us/omniverse/download/).
 
 More in detail (from the official discord):
 
-```admonish quote
-Omniverse users are welcome to sell their extensions for whatever they please. The end users must have a license of Omniverse to use their extensions with, but that can be the free Omniverse Individual version.
-```
+Omniverse (we're referring to SDK here, there are also cloud APIs which are governed by their own licensing and pricing terms) allows you to compose applications out of extensions as building blocks. Composer, View, IsaacSim are examples of multiple-specific-extensions-composed desktop applications.
 
-So programmers are free to write and sell their Omniverse extensions. Users can buy and use those extensions as long as they do it abiding by the Omniverse license (i.e. if they're working as a team of 20 people with Omniverse, an enterprise license must be purchased). If they're working as individuals (or teams of 2 people), no license is necessary and Omniverse is totally free.
+IsaacSim is a free and unsupported _reference application_ built on top of Omniverse (Composer and View are in the process of being no longer officially supported but can be used as reference applications as well for now).
 
-What about 3D content I create with e.g. Omniverse Composer (we will take a look at this in the next section)? Can I sell a rendered video of a Physical simulation made with Omniverse?
+Omniverse, with the IsaacSim reference application, has the following licensing options:
 
-```admonish quote
-Content and or code\extensions\apps created using OVI (Omniverse Individual license, i.e. abiding by the 2-users-tops requirement) for small teams, using desktops or cloud resources is allowed and can be used for commercial purposes.
-```
+* A free development, testing and research license for an individual user  without a limit on number of GPUs (via the NVIDIA developer program)
+* A free annual EDU license (education and academic research only) per GPU without enterprise support
+* A paid annual commercial license (Omniverse Enterprise) per GPU with enterprise support for Omniverse, for which NVIDIA also offers EDU pricing.
 
-So yes: you can create a video using Omniverse and you can sell it for whatever you want.
+This basically means:
+* If (EDU) builds an app and uses it internally for research/education, they can utilize the free EDU license.
+* If you use IsaacSim to build an app that is then used internally for production, each GPU needs to be licensed. This would be commercial usage.
+* If (non-EDU) wants to resell / distribute that application, non-EDU can either (1) embed and resell Omniverse Enterprise as part of the application or (2) require customers to have an OVE license for each GPU running that application.
 
-Can I use Omniverse in my own private cloud?
+So essentially a lot of the confusion comes from the fact IsaacSim is built on OV, and using OV is subject to the license terms NVIDIA provides it under, i.e. there is a dependency on it. The cases in which it would be free is with that edu license (without support), or the individual license. IsaacSim is being treated as a separate product but the licensing is still tied.
 
-```admonish quote
-For the free version, you are allowed to put Omniverse in the cloud for your own purposes. For example, you are allowed to put OV apps on Azure or AWS VM, create 3D projects and render out those projects using Omniverse Farm which can also be on an Azure VM for free.
-
-The EULA is designed that once you scale the number of users working together and you need support, you should get the enterprise license.
-
-Other licensing example, You can also use the Omniverse Individual version to create, build, sell your own extensions and or apps for free. The user leveraging that extension or app just needs to follow the same EULA.
-```
-
-The only other restriction pertains to letting users use your "abiding OVI individual license" Omniverse apps as cloud services:
-
-```admonish quote
-Lets say for example, you put USD Composer in the cloud and allow anyone to use it for free as a streamed application. This would not be allowed, using OVI as a service to users outside your company.
-```
+Nucleus Licensing will charge per instance/node, since it doesn't actually required a GPU to be run. The number of people who can work on it is unlimited.
 
 For any other question or clarification please read the final paragraph of this post and get in contact with NVIDIA sales for a special license tailored to your needs: [omniverse-license-questions@nvidia.com](mailto:omniverse-license-questions@nvidia.com) will get you in touch with a developer relations manager that can work with you.
 
